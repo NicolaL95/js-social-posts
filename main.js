@@ -11,7 +11,7 @@ let posts = [
 
         numeroLikes: 20,
 
-        dataCreazione: "25062019"
+        dataCreazione: "20 giorni fa"
     },
 
     {
@@ -26,7 +26,7 @@ let posts = [
 
         numeroLikes: 0,
 
-        dataCreazione: "25062020"
+        dataCreazione: "Un mese fa"
     },
 
     {
@@ -41,7 +41,7 @@ let posts = [
 
         numeroLikes: 10,
 
-        dataCreazione: "23062021"
+        dataCreazione: "Due mesi fa"
     },
 
     {
@@ -56,7 +56,7 @@ let posts = [
 
         numeroLikes: 30,
 
-        dataCreazione: "25062021"
+        dataCreazione: "Quattro mesi fa"
     },
 ]
 const main = document.getElementById("main")
