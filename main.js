@@ -1,6 +1,6 @@
-const posts = [
+let posts = [
     {
-        id: 1,
+        id: "A1",
 
         contenuto: "Lorem ipsum dolor sit amet consectetur adipisicing elit.Eveniet inventore labore laudantium rerum quidem autem temporibus eum obcaecati facere nullaLorem ipsum dolor sit amet consectetur adipisicing elit.Eveniet inventore labore laudantium rerum quidem autem temporibus eum obcaecati facere nulla.",
 
@@ -11,11 +11,11 @@ const posts = [
 
         numeroLikes: 20,
 
-        dataCreazione: "19/10/2021"
+        dataCreazione: "Due mesi fa"
     },
 
     {
-        id: 2,
+        id: "A2",
 
         contenuto: "Lorem ipsum dolor sit amet consectetur adipisicing elit.Eveniet inventore labore laudantium rerum quidem autem temporibus eum obcaecati facere nullaLorem ipsum dolor sit amet consectetur adipisicing elit.Eveniet inventore labore laudantium rerum quidem autem temporibus eum obcaecati facere nulla.",
 
@@ -26,11 +26,11 @@ const posts = [
 
         numeroLikes: 0,
 
-        dataCreazione: "11/10/2020"
+        dataCreazione: "Un anno fa"
     },
 
     {
-        id: 3,
+        id: "A3",
 
         contenuto: "Lorem ipsum dolor sit amet consectetur adipisicing elit.Eveniet inventore labore laudantium rerum quidem autem temporibus eum obcaecati facere nullaLorem ipsum dolor sit amet consectetur adipisicing elit.Eveniet inventore labore laudantium rerum quidem autem temporibus eum obcaecati facere nulla.",
 
@@ -41,11 +41,11 @@ const posts = [
 
         numeroLikes: 10,
 
-        dataCreazione: "12/10/2020"
+        dataCreazione: "3 mesi fa"
     },
 
     {
-        id: 4,
+        id: "A4",
 
         contenuto: "Lorem ipsum dolor sit amet consectetur adipisicing elit.Eveniet inventore labore laudantium rerum quidem autem temporibus eum obcaecati facere nullaLorem ipsum dolor sit amet consectetur adipisicing elit.Eveniet inventore labore laudantium rerum quidem autem temporibus eum obcaecati facere nulla.",
 
@@ -56,11 +56,17 @@ const posts = [
 
         numeroLikes: 30,
 
-        dataCreazione: "10/10/2020"
+        dataCreazione: "4 mesi fa"
     },
 ]
 const main = document.getElementById("main")
 for (let index = 0; index < posts.length; index++) {
+    if (posts[index].autore[1]) {
+        console.log("true")
+    }
+    else {
+        console.log("false")
+    }
     element = `<div class="container">
             <div class="information">
                 <img src="${posts[index].autore[0]}" alt="Random Image">
@@ -76,9 +82,24 @@ for (let index = 0; index < posts.length; index++) {
                 <img src="${posts[index].immagine}" alt="Random Image">
             </div>
             <div class="interaction">
-                <button><i class="fas fa-thumbs-up"></i>Mi piace</button>
-                <p class="like_counter">Piace a <span>${posts[index].numeroLikes}</span> persone</p>
+                <button class="A${index + 1}"><i class="fas fa-thumbs-up"></i>Mi piace</button>
+                <p class="like_counter">Piace a <span class="L${index + 1}">${posts[index].numeroLikes}</span> persone</p>
             </div>
         </div>`;
     main.innerHTML += element;
 }
+
+for (let index = 0; index < posts.length; index++) {
+    const element = document.querySelector(`.A${index + 1}`)
+    element.addEventListener("click", function () {
+        const idFinder = this.className;
+        for (let index = 0; index < posts.length; index++) {
+            if (idFinder == posts[index].id) {
+                console.log(posts[index].numeroLikes)
+                posts[index].numeroLikes = posts[index].numeroLikes + 1;
+                document.querySelector(`.L${index + 1}`).innerHTML = posts[index].numeroLikes;
+            }
+        }
+    })
+}
+
