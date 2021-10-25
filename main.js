@@ -7,11 +7,11 @@ let posts = [
         immagine: "https://unsplash.it/300/300?image=",
 
 
-        autore: ["https://unsplash.it/300/300?image=", "nomecognome1"],
+        autore: ["", "nome cognome1"],
 
         numeroLikes: 20,
 
-        dataCreazione: "Due mesi fa"
+        dataCreazione: "25062019"
     },
 
     {
@@ -22,11 +22,11 @@ let posts = [
         immagine: "https://unsplash.it/300/300?image=",
 
 
-        autore: ["https://unsplash.it/300/300?image=", "nomecognome2"],
+        autore: ["https://unsplash.it/300/300?image=", "nome cognome2"],
 
         numeroLikes: 0,
 
-        dataCreazione: "Un anno fa"
+        dataCreazione: "25062020"
     },
 
     {
@@ -37,11 +37,11 @@ let posts = [
         immagine: "https://unsplash.it/300/300?image=",
 
 
-        autore: ["https://unsplash.it/300/300?image=", "nomecognome3"],
+        autore: ["https://unsplash.it/300/300?image=", "nome cognome3"],
 
         numeroLikes: 10,
 
-        dataCreazione: "3 mesi fa"
+        dataCreazione: "23062021"
     },
 
     {
@@ -52,24 +52,20 @@ let posts = [
         immagine: "https://unsplash.it/300/300?image=",
 
 
-        autore: ["https://unsplash.it/300/300?image=", "nomecognome4"],
+        autore: ["https://unsplash.it/300/300?image=", "nome cognome4"],
 
         numeroLikes: 30,
 
-        dataCreazione: "4 mesi fa"
+        dataCreazione: "25062021"
     },
 ]
 const main = document.getElementById("main")
+
+/* AGGIUNTA ELEMENTO */
 for (let index = 0; index < posts.length; index++) {
-    if (posts[index].autore[1]) {
-        console.log("true")
-    }
-    else {
-        console.log("false")
-    }
     element = `<div class="container">
             <div class="information">
-                <img src="${posts[index].autore[0]}" alt="Random Image">
+                <img class="image_${index + 1}" src="${posts[index].autore[0]}"  alt="Random Image">
                 <div class="information_text">
                     <p class="user_name">${posts[index].autore[1]}</p>
                     <p class="date">${posts[index].dataCreazione}</p>
@@ -82,24 +78,47 @@ for (let index = 0; index < posts.length; index++) {
                 <img src="${posts[index].immagine}" alt="Random Image">
             </div>
             <div class="interaction">
-                <button class="A${index + 1}"><i class="fas fa-thumbs-up"></i>Mi piace</button>
+                <button class="A${index + 1}"><i class="fas fa-thumbs-up"></i> Mi piace</button>
                 <p class="like_counter">Piace a <span class="L${index + 1}">${posts[index].numeroLikes}</span> persone</p>
             </div>
         </div>`;
     main.innerHTML += element;
+
+    /* aggiunto controllo e fix per l'immagine rimossa */
+    const imgFinder = document.querySelector(`.image_${index + 1}`)
+    const arrPlace = getInitial(posts[index].autore[1])
+    imgFinder.alt = arrPlace;
+    let imgsrc = imgFinder.getAttribute("src")
+    if (imgsrc == "") {
+        imgFinder.classList.add("removeImage")
+    }
+
 }
 
+/* aggiunta evento like+ */
 for (let index = 0; index < posts.length; index++) {
     const element = document.querySelector(`.A${index + 1}`)
     element.addEventListener("click", function () {
         const idFinder = this.className;
         for (let index = 0; index < posts.length; index++) {
             if (idFinder == posts[index].id) {
-                console.log(posts[index].numeroLikes)
                 posts[index].numeroLikes = posts[index].numeroLikes + 1;
                 document.querySelector(`.L${index + 1}`).innerHTML = posts[index].numeroLikes;
             }
         }
     })
 }
+
+/* funzione per ottenere le iniziali */
+function getInitial(arr) {
+    let placeholder = [];
+    placeholder = arr[0];
+    for (let index = 0; index < arr.length; index++) {
+        if (arr[index] == " ") {
+            placeholder = placeholder + arr[index + 1]
+        }
+    }
+    return placeholder;
+}
+
 
